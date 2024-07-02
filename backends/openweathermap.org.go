@@ -106,15 +106,6 @@ func (c *openWeatherConfig) parseDaily(dataInfo []dataBlock, numdays int) []ifac
 		if day.Date.Day() == slot.Time.Day() {
 			day.Slots = append(day.Slots, slot)
 		}
-		if day.Date.Day() != slot.Time.Day() {
-			forecast = append(forecast, *day)
-			if len(forecast) >= numdays {
-				break
-			}
-			day = new(iface.Day)
-			day.Date = slot.Time
-			day.Slots = append(day.Slots, slot)
-		}
 
 	}
 	return forecast

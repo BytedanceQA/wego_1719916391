@@ -173,23 +173,7 @@ func wwoParseCond(cond wwoCond, date time.Time) (ret iface.Cond) {
 	return
 }
 
-func wwoParseDay(day wwoDay, index int) (ret iface.Day) {
-	//TODO: Astronomy
 
-	ret.Date = time.Now().Add(time.Hour * 24 * time.Duration(index))
-	date, err := time.Parse("2006-01-02", day.Date)
-	if err == nil {
-		ret.Date = date
-	}
-
-	if day.Hourly != nil && len(day.Hourly) > 0 {
-		for _, slot := range day.Hourly {
-			ret.Slots = append(ret.Slots, wwoParseCond(slot, date))
-		}
-	}
-
-	return
-}
 
 func wwoUnmarshalLang(body []byte, r *wwoResponse, lang string) error {
 	var rv map[string]interface{}
